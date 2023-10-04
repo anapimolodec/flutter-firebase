@@ -42,7 +42,15 @@ class _RegisterState extends State<Register> {
                 children: <Widget>[
                   const SizedBox(height: 20),
                   TextFormField(
-                    validator: (val) => val!.isEmpty ? "Enter an email" : null,
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r'^[a-zA-Z0-9.a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+                              .hasMatch(value)) {
+                        return "Enter Correct Email Address";
+                      } else {
+                        return null;
+                      }
+                    },
                     onChanged: (value) {
                       setState(() => email = value);
                     },
@@ -50,8 +58,15 @@ class _RegisterState extends State<Register> {
                   const SizedBox(height: 20),
                   TextFormField(
                     obscureText: true,
-                    validator: (val) =>
-                        val!.length < 6 ? 'Enter 6+ chars' : null,
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$')
+                              .hasMatch(value)) {
+                        return "비밀번호 8글자 이상, 대문자 및 소문자 포함, 숫자 포함, \n기호 포함 되어 있는지 확인하세요";
+                      } else {
+                        return null;
+                      }
+                    },
                     onChanged: (value) {
                       setState(() => password = value);
                     },
