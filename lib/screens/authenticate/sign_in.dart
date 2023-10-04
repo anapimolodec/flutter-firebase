@@ -3,6 +3,7 @@ import 'package:ff/services/auth.dart';
 import 'package:ff/widgets/Button.dart';
 import 'package:flutter/material.dart';
 import 'package:ff/theme/colors.dart';
+import 'package:ff/models/shared/constants.dart';
 
 class SignIn extends StatefulWidget {
   final Function function;
@@ -13,9 +14,11 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   String email = "";
   String password = "";
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +35,40 @@ class _SignInState extends State<SignIn> {
         padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Form(
+              key: _formKey,
               child: Column(
                 children: <Widget>[
                   const SizedBox(height: 20),
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r'^[a-zA-Z0-9.a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+                              .hasMatch(value)) {
+                        return "Enter Correct Email Address";
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: textInputDecoration.copyWith(
+                        hintText: 'Email', labelText: 'Email *'),
                     onChanged: (value) {
                       setState(() => email = value);
                     },
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter Password";
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: textInputDecoration.copyWith(
+                        hintText: 'Password', labelText: 'Password *'),
+                    obscureText: true,
                     onChanged: (value) {
                       setState(() => password = value);
                     },
@@ -89,10 +113,22 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(height: 16),
                   Button(
                     text: "로그인",
-                    onPressed: () {
-                      print("$email $password");
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        print("valid");
+                        dynamic result = await _auth.signInWithEmailAndPassword(
+                            email, password);
+                        if (result == null) {
+                          setState(() => error = "Error Signing In T.T");
+                        }
+                      }
                     },
                     isValid: true,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    error,
+                    style: TextStyle(color: AppColors.red),
                   ),
                 ],
               ),

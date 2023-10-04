@@ -1,3 +1,4 @@
+import 'package:ff/models/shared/constants.dart';
 import 'package:ff/services/auth.dart';
 // import 'package:ff/widgets/Input.dart';
 import 'package:ff/widgets/Button.dart';
@@ -27,14 +28,13 @@ class _RegisterState extends State<Register> {
         backgroundColor: AppColors.blue,
         elevation: 0.0,
         title: const Text(
-          '로그인',
+          'REGISTER',
         ),
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Form(
               key: _formKey,
@@ -42,6 +42,8 @@ class _RegisterState extends State<Register> {
                 children: <Widget>[
                   const SizedBox(height: 20),
                   TextFormField(
+                    decoration: textInputDecoration.copyWith(
+                        hintText: 'Email', labelText: 'Email *'),
                     validator: (value) {
                       if (value!.isEmpty ||
                           !RegExp(r'^[a-zA-Z0-9.a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
@@ -57,6 +59,8 @@ class _RegisterState extends State<Register> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    decoration: textInputDecoration.copyWith(
+                        hintText: 'Password', labelText: 'Password *'),
                     obscureText: true,
                     validator: (value) {
                       if (value!.isEmpty ||
@@ -111,9 +115,10 @@ class _RegisterState extends State<Register> {
                     error,
                     style: TextStyle(color: AppColors.red),
                   ),
+                  const SizedBox(height: 40)
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
