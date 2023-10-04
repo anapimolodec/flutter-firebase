@@ -4,14 +4,14 @@ import 'package:ff/widgets/Button.dart';
 import 'package:flutter/material.dart';
 import 'package:ff/theme/colors.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function function;
-  SignIn({required this.function});
+  Register({required this.function});
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
 
   String email = "";
@@ -65,27 +65,11 @@ class _SignInState extends State<SignIn> {
                             widget.function();
                           },
                           child: const Text(
-                            "사용자 가입",
+                            "로그인",
                             style: TextStyle(
                               fontSize: 15.0,
                               color: AppColors.blue,
                             ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => PasswordResetView()),
-                            // );
-                          },
-                          child: const Text(
-                            "비밀번호를 잊어버렸나요?",
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                color: AppColors.blue,
-                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -93,7 +77,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   const SizedBox(height: 16),
                   Button(
-                    text: "로그인",
+                    text: "사용자 가입",
                     onPressed: () {
                       print("$email $password");
                     },
