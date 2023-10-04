@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.ff"
+    namespace "com.anapimolodec.ff"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
