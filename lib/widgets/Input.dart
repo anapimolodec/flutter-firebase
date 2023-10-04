@@ -5,7 +5,7 @@ import '../../theme/colors.dart';
 import 'Label.dart';
 
 class Input extends StatefulWidget {
-  // final TextEditingController controller;
+  final TextEditingController controller;
   final String hintText;
   final String labelText;
   final bool isError;
@@ -20,7 +20,7 @@ class Input extends StatefulWidget {
     this.disable = false,
     this.maxLength = 200,
     this.isPassword = false,
-    // required this.controller,
+    required this.controller,
     required this.hintText,
     required this.labelText,
     this.onChanged,
@@ -60,7 +60,7 @@ class _Input extends State<Input> {
             maxLength: widget.maxLength,
             enabled: !widget.disable,
             focusNode: widget.focusNode,
-            // controller: widget.controller,
+            controller: widget.controller,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               suffixIcon: widget.isPassword

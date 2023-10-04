@@ -1,5 +1,5 @@
 import 'package:ff/services/auth.dart';
-import 'package:ff/widgets/Input.dart';
+// import 'package:ff/widgets/Input.dart';
 import 'package:ff/widgets/Button.dart';
 import 'package:flutter/material.dart';
 import 'package:ff/theme/colors.dart';
@@ -13,9 +13,11 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   String email = "";
   String password = "";
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +37,24 @@ class _RegisterState extends State<Register> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Form(
+              key: _formKey,
               child: Column(
                 children: <Widget>[
                   const SizedBox(height: 20),
-                  Input(
+                  TextFormField(
+                    validator: (val) => val!.isEmpty ? "Enter an email" : null,
                     onChanged: (value) {
                       setState(() => email = value);
                     },
-                    hintText: '이메일을 입력하세요',
-                    labelText: '이메일',
                   ),
                   const SizedBox(height: 20),
-                  Input(
+                  TextFormField(
+                    obscureText: true,
+                    validator: (val) =>
+                        val!.length < 6 ? 'Enter 6+ chars' : null,
                     onChanged: (value) {
                       setState(() => password = value);
                     },
-                    hintText: '비밀번호를 입력하세요',
-                    labelText: '비밀번호',
-                    isPassword: true,
                   ),
                   const SizedBox(height: 50),
                   Align(
@@ -78,10 +80,21 @@ class _RegisterState extends State<Register> {
                   const SizedBox(height: 16),
                   Button(
                     text: "사용자 가입",
-                    onPressed: () {
-                      print("$email $password");
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        dynamic result = await _auth
+                            .registerWithEmailAndPassword(email, password);
+                        if (result == null) {
+                          setState(() => error = "Error!");
+                        }
+                      }
                     },
                     isValid: true,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    error,
+                    style: TextStyle(color: AppColors.red),
                   ),
                 ],
               ),

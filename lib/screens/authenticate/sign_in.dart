@@ -1,5 +1,5 @@
 import 'package:ff/services/auth.dart';
-import 'package:ff/widgets/Input.dart';
+// import 'package:ff/widgets/Input.dart';
 import 'package:ff/widgets/Button.dart';
 import 'package:flutter/material.dart';
 import 'package:ff/theme/colors.dart';
@@ -38,21 +38,16 @@ class _SignInState extends State<SignIn> {
               child: Column(
                 children: <Widget>[
                   const SizedBox(height: 20),
-                  Input(
+                  TextFormField(
                     onChanged: (value) {
                       setState(() => email = value);
                     },
-                    hintText: '이메일을 입력하세요',
-                    labelText: '이메일',
                   ),
                   const SizedBox(height: 20),
-                  Input(
+                  TextFormField(
                     onChanged: (value) {
                       setState(() => password = value);
                     },
-                    hintText: '비밀번호를 입력하세요',
-                    labelText: '비밀번호',
-                    isPassword: true,
                   ),
                   const SizedBox(height: 50),
                   Align(
