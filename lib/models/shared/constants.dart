@@ -17,3 +17,17 @@ const textInputDecoration = InputDecoration(
       borderRadius: BorderRadius.all(Radius.circular(16.0)),
       borderSide: BorderSide(color: AppColors.red, width: 1)),
 );
+
+const coffeeDecoration = InputDecoration(
+  fillColor: Colors.white,
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(16.0)),
+    borderSide: BorderSide(
+      color: Colors.brown,
+    ),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(16.0)),
+    borderSide: BorderSide(color: Colors.brown, width: 1.5),
+  ),
+);
