@@ -26,7 +26,6 @@ class _SettingsFormState extends State<SettingsForm> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          print(snapshot);
           if (snapshot.hasData) {
             UserData userdata = snapshot.data!;
             return Form(
@@ -41,7 +40,7 @@ class _SettingsFormState extends State<SettingsForm> {
                       TextFormField(
                         initialValue: _currentName ?? userdata.name,
                         validator: (value) =>
-                            value!.isEmpty ? 'Enter your name' : userdata.name,
+                            value!.isEmpty ? 'Enter your name' : null,
                         onChanged: (value) => setState(() {
                           _currentName = value;
                         }),
@@ -72,7 +71,15 @@ class _SettingsFormState extends State<SettingsForm> {
                             (_currentStrength ?? userdata.strength).toDouble(),
                       ),
                       ElevatedButton(
-                        onPressed: () async {},
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            await DatabaseService(uid: user.uid).updateUserData(
+                                _currentSugars ?? userdata.sugars,
+                                _currentName ?? userdata.name,
+                                _currentStrength ?? userdata.strength);
+                            Navigator.pop(context);
+                          }
+                        },
                         child: const Text('Update'),
                       )
                     ],
