@@ -11,7 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider<MyUser>.value(
       value: AuthService().user,
       initialData: MyUser(uid: ''),
-      child: MaterialApp(
+      child: const MaterialApp(
         home: Wrapper(),
       ),
     );

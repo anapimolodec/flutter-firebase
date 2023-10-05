@@ -9,7 +9,7 @@ class Button extends StatefulWidget {
   final Color backgroundColor; // 배경색을 위한 새로운 속성
   final Color titleColor; // 타이틀 색상을 위한 새로운 속성
 
-  Button({
+  const Button({super.key, 
     required this.text,
     required this.isValid,
     required this.onPressed,
@@ -25,7 +25,7 @@ class Button extends StatefulWidget {
 class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         width: double.infinity,
         height: 48,
         child: ElevatedButton(

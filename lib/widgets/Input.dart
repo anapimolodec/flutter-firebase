@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/colors.dart';
@@ -15,7 +14,7 @@ class Input extends StatefulWidget {
   final bool isPassword;
   final Function(String)? onChanged;
 
-  Input({
+  const Input({super.key, 
     this.isError = false,
     this.disable = false,
     this.maxLength = 200,

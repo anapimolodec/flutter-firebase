@@ -8,7 +8,7 @@ import 'package:ff/theme/colors.dart';
 
 class Register extends StatefulWidget {
   final Function function;
-  Register({required this.function});
+  const Register({super.key, required this.function});
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -25,7 +25,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return loading
-        ? Loading()
+        ? const Loading()
         : Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
@@ -36,7 +36,7 @@ class _RegisterState extends State<Register> {
               ),
             ),
             body: Padding(
-              padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
+              padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -125,7 +125,7 @@ class _RegisterState extends State<Register> {
                           const SizedBox(height: 20),
                           Text(
                             error,
-                            style: TextStyle(color: AppColors.red),
+                            style: const TextStyle(color: AppColors.red),
                           ),
                           const SizedBox(height: 40)
                         ],

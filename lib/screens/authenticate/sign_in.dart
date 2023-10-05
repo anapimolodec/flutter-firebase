@@ -8,7 +8,7 @@ import 'package:ff/models/shared/constants.dart';
 
 class SignIn extends StatefulWidget {
   final Function function;
-  SignIn({required this.function});
+  const SignIn({super.key, required this.function});
   @override
   _SignInState createState() => _SignInState();
 }
@@ -25,7 +25,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return loading
-        ? Loading()
+        ? const Loading()
         : Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
@@ -36,7 +36,7 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             body: Padding(
-              padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
+              padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -138,7 +138,7 @@ class _SignInState extends State<SignIn> {
                         const SizedBox(height: 20),
                         Text(
                           error,
-                          style: TextStyle(color: AppColors.red),
+                          style: const TextStyle(color: AppColors.red),
                         ),
                       ],
                     ),
