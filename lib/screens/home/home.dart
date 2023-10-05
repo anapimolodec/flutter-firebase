@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
-          title: Text('Welcome!'),
+          title: Text('Coffee Group'),
           centerTitle: false,
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
@@ -46,7 +46,15 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: BrewList(),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/coffee_bg.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: BrewList(),
+        ),
       ),
     );
   }
